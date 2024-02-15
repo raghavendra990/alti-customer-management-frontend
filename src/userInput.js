@@ -37,8 +37,6 @@ const UserInput =({meta})=>{
     const handlerLogin = async (event)=>{
         event.preventDefault();
         // setLoading(true);
-        console.log('event', event);
-        console.log('plan', event.target.plan.value);
 
         var fields = [];
         if(meta === 'Register'){
@@ -72,7 +70,8 @@ const UserInput =({meta})=>{
                 const token = respdata?.token;
                 console.log('respdata', respdata, resp, token)
                 if (token) {
-                
+                localStorage.setItem("Authorization", token);
+
         
                 setTimeout(() => {
                     setLoading(false);
@@ -109,29 +108,30 @@ const UserInput =({meta})=>{
                 <Input type="text" className="form-control" id="name" placeholder="Name" required />
               </div>
               <div className="mb-3">
-                <input type="email" className="form-control" id="email" placeholder="Email" required />
-              </div>
-              <div className="mb-3">
-                <input type="text" className="form-control" id="adhar_number" placeholder="Adhaar Number" required />
-              </div>
-              <div className="mb-3">
-                <DatePicker placeholderText="DOB" id="dob" selected={dob} onChange={(e) => setDob(e)}/>
-
-              </div></>}
-
-              <div className="mb-3">
                 <PhoneNumber className="form-control" id="phone_number" placeholder="Phone Number" required />
                 <div className="invalid-feedback">
                   Phone Number is invalid.
                 </div>
               </div>
               <div className="mb-3">
-              <select class="form-select" aria-label="Plan" id="plan">
+                <input type="text" className="form-control" id="adhar_number" placeholder="Adhaar Number" required />
+              </div>
+              <div className="mb-3">
+                <DatePicker placeholderText="DOB" id="dob" selected={dob} onChange={(e) => setDob(e)}/>
+                <select class="form-select" aria-label="Plan" id="plan">
                 {plan?.map((item)=>{
                   return <option value={item.id}>{item.name} price -  {item.price} validity - {item.validity}</option>
                 })}
                   
                 </select>
+              </div></>}
+
+              <div className="mb-3">
+               <input type="email" className="form-control" id="email" placeholder="Email" required />
+
+              </div>
+              <div className="mb-3">
+              
               </div>
               
 
